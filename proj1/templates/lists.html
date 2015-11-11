@@ -1,0 +1,72 @@
+<!-- lists.html -->
+<!DOCTYPE html>
+<html>
+<head>
+	<style type="text/css">
+		table {
+	    border-collapse: collapse;
+		}
+
+		table, td, th {
+	    	border: 1px solid black;
+		}
+	</style>
+	<title>All Lists</title>
+	<meta charset="utf-8" />
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+</head>
+<body>
+	<h1>List</h1>
+	<div>
+	{% if post_list %}
+
+		<div id="map" style="width: 600px; height: 400px"></div>
+		<form>
+			<table style="width:50%">
+				<tr>
+					<th>Title</th>
+					<th>Longitude</th>
+					<th>Latitude</th>
+					<th>Time</th>
+				<tr>
+			{% for post in post_list %}
+				<tr>		
+					<td>{{ post.title }}</td>
+					<td>{{ post.Xpos }}</td>
+					<td>{{ post.Ypos }} </td>
+					<td>{{ post.created_at|date:"Y/m/d, P" }}</td>
+				</tr>
+			{% endfor %}
+			</table>
+		</form>
+	{% else %}
+		<p>There is no record,please push the button to locat. </p>
+	{% endif %}
+	</div>		
+	<input type ="button" onclick="location.href='/'" value="To locat and record Position"></input>
+	<script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+	<script>	
+		var map = L.map('map').setView([ {{ post_list.0.Xpos }},{{ post_list.0.Ypos }}], 13);
+		L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+			attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+		}).addTo(map);
+
+		var LeafIcon = L.Icon.extend({
+			options: {
+				shadowUrl: '../docs/images/leaf-shadow.png',
+				iconSize:     [38, 95],
+				shadowSize:   [50, 64],
+				iconAnchor:   [22, 94],
+				shadowAnchor: [4, 62],
+				popupAnchor:  [-3, -76]
+			}
+		});
+		{% for post in post_list %}
+		L.marker([ {{ post.Xpos }},{{ post.Ypos }}]).addTo(map);
+		{% endfor %}
+	</script>
+	
+
+</body>
+
+</html>

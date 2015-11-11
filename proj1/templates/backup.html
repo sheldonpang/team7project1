@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+{% load leaflet_tags %}
+<head>
+    <title>proj1</title>
+    {% leaflet_js  plugins="bouncemarker,draw" %}
+    {% leaflet_css plugins="bouncemarker,draw" %}
+	<script type="text/javascript">
+        function myCheck()
+        {
+           for(var i=0;i<document.form1.elements.length-1;i++)
+           {
+              if(document.form1.elements[i].value=="")
+              {
+                 alert("当前表单不能有空项");
+                 document.form1.elements[i].focus();
+                 return false;
+              }
+           }
+           return true;
+          
+        }
+    </script>
+    <script type="text/javascript">
+        function map_init_basic (map, options , position) {
+        }
+    </script>
+</head>
+<body onload="getLocation()">
+    <h1>Return Location</h1>
+    {% leaflet_map "map" callback="window.map_init_basic" %}
+
+    <form name = form1 action="/received/" method="post" onSubmit="return myCheck()" onLoad="getLocation">
+		{% csrf_token %}
+		<p>Title: <input type="text" name="Title"></p>
+        <p>X_position: <input type="text" id="Xpos" name="Xpos"></p>
+        <p>Y_position: <input type="text" id="Ypos" name="Ypos"></p>
+        <input type="submit" value="Submit">
+    </form>
+
+<script>
+ 
+    var X,Y;
+
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+       window.addEventListener("map:init", function (e) {
+        var detail = e.detail;
+        var marker = new L.marker([22.983759199999998, 120.21086969999999]);
+            detail.map.addLayer(marker);
+            detail.map.setView(marker);
+        }, false); 
+
+        } else { 
+            window.alert("Geolocation is not supported by this browser.");
+        }
+    }
+
+    function showPosition(position) {
+        Xpos.value = position.coords.latitude;
+        Ypos.value = position.coords.longitude;
+        X = position.coords.latitude;
+        Y = position.coords.longitude;
+
+    }
+
+    L.marker([23.5,121]).addTo(map);
+</script>
+
+</body>
+</html>
