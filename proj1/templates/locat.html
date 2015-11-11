@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html>
-{% load leaflet_tags %}
 <head>
     <title>Welcome</title>
-    {% leaflet_js %}
-    {% leaflet_css %}
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+    <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
 	<script type="text/javascript">
         function myCheck()
         {
@@ -36,7 +35,7 @@
 </head>
 <body onload="getLocation()">
     <h1>Record Location</h1>
-    {% leaflet_map "map" %}
+    <div id="map" style="width: 600px; height: 400px"></div>
 
     <form name = form1 action="/lists/" method="post" onSubmit="return myCheck()" onLoad="getLocation">
 		{% csrf_token %}
