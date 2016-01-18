@@ -58,13 +58,13 @@
 	    #msform {
 	        width: 310px;
 	        margin: 0;
-	        text-align: center;
+	        text-align: left;
 	        position: relative;
 	    }
 	    #msform fieldset {
 	        background: transparent;
 	        border: 0 none;
-	        padding: 20px 30px;
+	        padding: 0;
 	        
 	        box-sizing: border-box;
 	        width: 100%;
@@ -91,7 +91,7 @@
 	    }
 	    /*buttons*/
 	    #msform .action-button {
-	        width: 100px;
+	        width: 150px;
 	        background: #1abc9c;
 	        font-weight: bold;
 	        color: white;
@@ -158,7 +158,7 @@
 	    ul#primary li.logo {border-right: 5px solid #e3e3e3;}
 
 	</style>
-	<title>Map</title>
+	<title>台灣</title>
 	<meta charset="utf-8" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.js"></script>
@@ -170,11 +170,17 @@
                 <a><b>Team7Project1 - NCKU_IKDD</b></a>
             </li>
 
-           <li class="last">
-                <a href="/map">Map</a>
+            <li class="last">
+                <a href="/president_message">總統府留言板</a>
+            </li>
+            <li class="last">
+                <a href="/president">To - 總統府</a>
+            </li>
+            <li class="last">
+                <a href="/map">台灣</a>
             </li>
             <li class="first active">
-                <a href="/" class="active">Home</a>
+                <a href="/" class="active">首頁</a>
             </li>
         </ul>
     </nav>
@@ -184,7 +190,7 @@
             <div style="width: 422px; top: 0; right: 0; left: 0; position: absolute; display: table-cell;">
                 <div style="top: 231px; left: 60px; width: 521px; position: absolute;">
                     <h2 style="line-height: 1.2em;" class="font_2">
-                        <span style="line-height:1.2em;">Taiwan.</span>
+                        <span style="line-height:1.2em;">台灣.</span>
                     </h2>
                     <h2 style="line-height: 1.2em;" class="font_2">
                         <span style="line-height:1.2em;">Number 1!</span>
@@ -194,7 +200,7 @@
                 <div style="top: 370px; left: 60px; width: 289px; position: absolute;">
                     <p style="line-height: 1.4em;" class="font_8">
                         <span style="line-height:1.4em;">
-                            <span style="letter-spacing:0.05em;" class="font_8">Your contribution will make a better Taiwan!
+                            <span style="letter-spacing:0.05em;" class="font_8">你的貢獻將會讓台灣更加美好！別懷疑，這只是單純的連線而已。
                             </span>
                         </span>
                     </p>
@@ -203,7 +209,7 @@
                 <div style="top: 440px; left:60px; width: 289px; position: absolute;">
                 	<form id ="msform">
                 		<fieldset>
-                    		<input type="button" value="Home" onclick="location.href='/'" class="previous action-button" >
+                    		<input type="button" value="返回首頁" onclick="location.href='/'" class="previous action-button" >
                     	</fieldset>
                     </form>
                 </div>

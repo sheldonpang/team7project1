@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
-from gps.views import locat,received,map
+from gps.views import locat,received,map,president,president_message
 
 urlpatterns = patterns('',
     # Examples:
@@ -12,4 +12,6 @@ urlpatterns = patterns('',
     url(r'^$', locat),
     url(r'^received/', received),
 	url(r'^map/', map),
+	url(r'^president/', president),
+	url(r'^president_message/', president_message),
 )
