@@ -303,7 +303,7 @@
         current = new L.marker([lan,laa]).addTo(map)
             .bindPopup("<b>You are Here!</b>").openPopup();
 
-        president = new L.marker([25.04005524, 121.51193261]).bindPopup("<b><em>總統府</em></b><br>什麼都可以說,ok Der</br>").addTo(map).openPopup();
+        president = new L.marker([25.04005524, 121.51193261]).bindPopup("<b>總統府</b><br>什麼都可以說,ok Der</br>").addTo(map).openPopup();
 
 		var circle = L.circle([25.04005524, 121.51193261], 50, {
 		    color: 'red',
@@ -312,7 +312,7 @@
 		}).addTo(map);
 
         {% for post in post_message %}
-            marker = new L.marker([ {{ post.Xpos }},{{ post.Ypos }}]).bindPopup("<b><em>{{ post.name }}</em></b><br>{{ post.title }}</br>");
+            marker = new L.marker([ {{ post.Xpos }},{{ post.Ypos }}]).bindPopup("<b>{{ post.name }}</b><br>{{ post.title }}</br>");
             marker.on('mouseover', function (e) {
                 this.openPopup();
                 current.closePopup();
