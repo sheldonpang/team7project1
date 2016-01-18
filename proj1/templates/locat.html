@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Welcome</title>
+    <title>Draw Taiwan</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.js"></script>
 	<script type="text/javascript">
@@ -21,29 +21,210 @@
         }
     </script>
     <style>
-
     .leaflet-container {  /* all maps */
         width:  600px;
         height: 400px;
+        perspective: 10px;
     }
 
     #specialbigmap {
         height: 800px;
     }
 
-</style>
+    h2 {
+        margin: 0;
+    }
+
+    .font_2 {
+        font: normal normal normal 42px/1.4em avenir-lt-w01_35-light1475496,sans-serif;
+        color: white;
+    }
+
+    .font_8 {
+        font: normal normal normal 15px/1.4em avenir-lt-w01_35-light1475496,sans-serif;
+        color: white;
+    }
+
+    /*custom font*/
+    @import url(http://fonts.googleapis.com/css?family=Montserrat);
+
+    /*basic reset*/
+    * {margin: 0; padding: 0;}
+
+    html {
+        height: 100%;
+        /*Image only BG fallback*/
+        background: url('http://thecodeplayer.com/uploads/media/gs.png');
+        /*background = gradient + image pattern combo*/
+        background: 
+            linear-gradient(rgba(196, 102, 0, 0.2), rgba(155, 89, 182, 0.2)), 
+            url('http://thecodeplayer.com/uploads/media/gs.png');
+    }
+
+    body {
+        font-family: montserrat, arial, verdana;
+    }
+    /*form styles*/
+    #msform {
+        width: 310px;
+        margin: 0;
+        text-align: center;
+        position: relative;
+    }
+    #msform fieldset {
+        background: white;
+        border: 0 none;
+        border-radius: 3px;
+        box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+        padding: 20px 30px;
+        
+        box-sizing: border-box;
+        width: 100%;
+        margin: 0;
+        
+        /*stacking fieldsets above each other*/
+        position: relative;
+    }
+    /*Hide all except first fieldset*/
+    #msform fieldset:not(:first-of-type) {
+        display: none;
+    }
+    /*inputs*/
+    #msform input, #msform textarea {
+        padding: 15px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        margin-bottom: 10px;
+        width: 100%;
+        box-sizing: border-box;
+        font-family: montserrat;
+        color: #2C3E50;
+        font-size: 15px;
+    }
+    /*buttons*/
+    #msform .action-button {
+        width: 100px;
+        background: #1abc9c;
+        font-weight: bold;
+        color: white;
+        border: 0 none;
+        border-radius: 1px;
+        cursor: pointer;
+        padding: 10px 5px;
+        margin: 10px 5px;
+    }
+    #msform .action-button:hover, #msform .action-button:focus {
+        box-shadow: 0 0 0 2px white, 0 0 0 3px #1abc9c;
+    }
+    /*headings*/
+    .fs-title {
+        font-size: 15px;
+        text-transform: uppercase;
+        color: #2C3E50;
+        margin-bottom: 10px;
+    }
+    .fs-subtitle {
+        font-weight: normal;
+        font-size: 13px;
+        color: #666;
+        margin-bottom: 20px;
+    }
+
+    /*Nav Menu*/
+    #navigation {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    background-color: white;
+    height: 42px;
+    }
+    ul#primary {
+    margin: 0;
+    padding: 0;
+    background: #fff;
+    width: 100%;
+    }
+
+    ul#primary li {
+    margin: 0;
+    border-left: 5px solid #e3e3e3;
+    padding: 0;
+    display: block;
+    float: right;
+    list-style: none;
+    background: #fff;
+    }
+
+    ul#primary li a {
+    text-transform: uppercase;
+    display: block;
+    text-decoration: none;
+    color: #535151;
+    line-height: 1;
+    padding: 16px 24px 14px 23px;
+    font-size: 11px;
+    font-family: "Gotham HTF", Arial, sans-serif;
+    font-weight: 500;
+    }
+    ul#primary li.last {border-right: 0;}
+    ul#primary li.logo {border-right: 5px solid #e3e3e3;}
+
+    </style>
 </head>
 <body onload="getLocation()">
-    <h1>Record Location</h1>
-    <div id="map" style="width: 600px; height: 400px"></div>
+    <nav id="navigation" class="with-primary">
+        <ul id="primary" class="links clearfix main-menu menu">
+            <li class="logo" style="float: left;">
+                <a><b>Team7Project1 - NCKU_IKDD</b></a>
+            </li>
 
-    <form name = form1 action="/lists/" method="post" onSubmit="return myCheck()" onLoad="getLocation">
-		{% csrf_token %}
-		<p>Title: <input type="text" name="Title"></p>
-        <p>X_position: <input type="text" id="Xpos" name="Xpos"></p>
-        <p>Y_position: <input type="text" id="Ypos" name="Ypos"></p>
-        <input type="submit" value="Submit">
-    </form>
+           <li class="last">
+                <a href="/map">Map</a>
+            </li>
+            <li class="first active">
+                <a href="/" class="active">Home</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div style="width:100%; overflow: hidden; display: table;">
+        <div style="width: 980px; height: 900px; position: absolute; margin-left: auto; margin-right: auto; left: 0; right: 0; display: table-row;">
+            <div style="width: 422px; top: 0; right: 0; left: 0; position: absolute; display: table-cell;">
+                <div style="top: 231px; left: 60px; width: 521px; position: absolute;">
+                    <h2 style="line-height: 1.2em;" class="font_2">
+                        <span style="line-height:1.2em;">Link Taiwan.</span>
+                    </h2>
+                    <h2 style="line-height: 1.2em;" class="font_2">
+                        <span style="line-height:1.2em;">with Line.</span>
+                    </h2>
+                </div>
+
+                <div style="top: 370px; left: 60px; width: 289px; position: absolute;">
+                    <p style="line-height: 1.4em;" class="font_8">
+                        <span style="line-height:1.4em;">
+                            <span style="letter-spacing:0.05em;" class="font_8">Contribute your current geolocation to draw a unique Taiwan
+                            </span>
+                        </span>
+                    </p>
+                </div>
+
+                <div style="top: 440px; left:60px; width: 289px; position: absolute;">
+                    <form id ="msform" name ="form1" action="/map/" method="post" onSubmit="return myCheck()" onLoad="getLocation">
+                    {% csrf_token %}
+                        <fieldset>
+                            <input type="text" name="Name" placeholder="Name">
+                            <input type="text" name="Title" placeholder="Say Something">
+                            <input type="text" id="Xpos" name="Xpos" readonly>
+                            <input type="text" id="Ypos" name="Ypos" readonly>
+                            <input type="submit" value="Submit" class="submit action-button" >
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+            <div id="map" style="width: 558px; height: 683px; top: 141px; margin-left: 422px; position: absolute; border-radius: 25px; border: 2px solid #73AD21; display: table-cell;"></div>
+        </div>
+    </div>
+
     <script>
     function getLocation() {
         if (navigator.geolocation) {
@@ -57,23 +238,51 @@
     function showPosition(position) {
         Xpos.value = position.coords.latitude;
         Ypos.value = position.coords.longitude;
-    		lan =position.coords.latitude;
-    		laa =position.coords.longitude;
-    		var map = L.map('map').setView([lan,laa], 13);
+        lan = position.coords.latitude;
+        laa = position.coords.longitude;
 
-    		L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6IjZjNmRjNzk3ZmE2MTcwOTEwMGY0MzU3YjUzOWFmNWZhIn0.Y8bhBaUMqFiPrDRW9hieoQ', {
-    			maxZoom: 18,
-    			attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
-    				'<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-    				'Imagery © <a href="http://mapbox.com">Mapbox</a>',
-    			id: 'mapbox.streets'
-    		}).addTo(map);
+        var map = L.map('map').setView([lan,laa], 8);
+        L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6IjZjNmRjNzk3ZmE2MTcwOTEwMGY0MzU3YjUzOWFmNWZhIn0.Y8bhBaUMqFiPrDRW9hieoQ', {
+        maxZoom: 18,
+        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+            '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+            'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+        id: 'mapbox.streets'
+        }).addTo(map);
 
+        var polyline_options = {
+        color: '#000'
+        };
 
-    		L.marker([lan,laa]).addTo(map)
-    			.bindPopup("<b>You are Here!</b>").openPopup();
+        var polyline_options_current = {
+        color: '#2ecc71'
+        };
 
-    		var popup = L.popup();
+        var Polyline = {};
+        var Polyline_current = {};
+        Polyline = new L.polyline([],polyline_options).addTo(map);
+        Polyline_current = new L.polyline([],polyline_options_current).addTo(map);
+
+        current = new L.marker([lan,laa]).addTo(map)
+            .bindPopup("<b>You are Here!</b>").openPopup();
+
+        {% for post in post_list %}
+            marker = new L.marker([ {{ post.Xpos }},{{ post.Ypos }}]).bindPopup("<b><em>{{ post.name }}</em></b><br>{{ post.title }}</br>");
+            marker.on('mouseover', function (e) {
+                this.openPopup();
+            });
+            marker.on('mouseout', function (e) {
+                this.closePopup();
+                current.openPopup();
+            });
+
+            map.addLayer(marker);
+            Polyline.addLatLng([ {{ post.Xpos }},{{ post.Ypos }}]);
+        {% endfor %}
+
+        Polyline_current.addLatLng([ {{post_list.last.Xpos}},{{ post_list.last.Ypos}}]);
+        Polyline_current.addLatLng([lan,laa]);        
+
     }
     </script>
 </body>

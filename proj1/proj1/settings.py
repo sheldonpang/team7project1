@@ -49,7 +49,6 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'leaflet',
     'gps',
 )
 
@@ -64,9 +63,9 @@ MIDDLEWARE_CLASSES = (
 )
 
 ROOT_URLCONF = 'proj1.urls'
-
+"""
 WSGI_APPLICATION = 'proj1.wsgi.application'
-
+"""
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
