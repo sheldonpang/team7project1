@@ -273,7 +273,7 @@
             .bindPopup("<b>You are Here!</b>").openPopup();
 
         {% for post in post_list %}
-            marker = new L.marker([ {{ post.Xpos }},{{ post.Ypos }}]).bindPopup("<b><em>{{ post.name }}</em></b><br>{{ post.title }}</br>");
+            marker = new L.marker([ {{ post.Xpos }},{{ post.Ypos }}]).bindPopup("<b>{{ post.name }}</b><br>{{ post.title }}</br>");
             marker.on('mouseover', function (e) {
                 this.openPopup();
             });

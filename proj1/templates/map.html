@@ -241,10 +241,10 @@
 		var currentPolygon = {};
 		currentPolygon = new L.polyline([]).addTo(map);
 
-        current = new L.marker([{{post_list.last.Xpos}},{{ post_list.last.Ypos}}]).addTo(map).bindPopup("<b><em>{{ post_list.last.name}}</em></b><br>{{ post_list.last.title}}</br>").openPopup();
+        current = new L.marker([{{post_list.last.Xpos}},{{ post_list.last.Ypos}}]).addTo(map).bindPopup("<b>{{ post_list.last.name}}</b><br>{{ post_list.last.title}}</br>").openPopup();
 
 		{% for post in post_list %}
-		marker = new L.marker([ {{ post.Xpos }},{{ post.Ypos }}]).bindPopup("<b><em>{{ post.name }}</em></b><br>{{ post.title }}</br>");
+		marker = new L.marker([ {{ post.Xpos }},{{ post.Ypos }}]).bindPopup("<b>{{ post.name }}</b><br>{{ post.title }}</br>");
 
 
 		marker.on('mouseover', function (e) {
